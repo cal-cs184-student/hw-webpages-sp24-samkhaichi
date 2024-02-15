@@ -1,0 +1,11 @@
+Explain pixel sampling in your own words and describe how you implemented it to perform texture mapping. Briefly discuss the two different pixel sampling methods, nearest and bilinear.
+
+Pixel sampling is taking a pixel coordinate in an image and returning its pixel value. Previously, we have used Barycentric coordinate to interpolate color. But, this can also applies to coordinate point. By assigning each vertex of the triangle a coordinate on the texture map, we are able to interpolate coordinate points on the texture map. Applying pixel sampling to theses pixel coordinates allow us to basically copies the color palette of the texture map onto the triangle.
+
+For comparison, we used two different sampling methods: nearest and bilinear. Nearest pixel sampling is simply finding the nearest pixel that encloses the coordinate and returning its color. Bilinear is taking the 4 closest pixels and returning color based on how close each of those are to the actual coordinate.
+
+Check out the svg files in the svg/texmap/ directory. Use the pixel inspector to find a good example of where bilinear sampling clearly defeats nearest sampling. Show and compare four png screenshots using nearest sampling at 1 sample per pixel, nearest sampling at 16 samples per pixel, bilinear sampling at 1 sample per pixel, and bilinear sampling at 16 samples per pixel.
+
+
+Comment on the relative differences. Discuss when there will be a large difference between the two methods and why.
+Bilinear is similar to supersampling in the sense that both average 2 or samples together. Because nearest neighbor doesn't average, this means that big differences occurs when there is high contrast between adjacent pixels. For example, an alternaing pattern of black and white will result in an averaged out gray in bilinear, but remains a pattern for nearest neighbor sampling. 

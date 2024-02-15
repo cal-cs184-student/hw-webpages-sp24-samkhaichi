@@ -1,0 +1,3 @@
+Create an updated version of svg/transforms/robot.svg with cubeman doing something more interesting, like waving or running. Feel free to change his colors or proportions to suit your creativity. Save your svg file as my_robot.svg in your docs/ directory and show a png screenshot of your rendered drawing in your write-up. Explain what you were trying to do with cubeman in words.
+
+Person looking to the right. Tilt the head. Rotated the arms. And bent the leg for the emphasis.

@@ -1,0 +1,21 @@
+Explain level sampling in your own words and describe how you implemented it for texture mapping.
+
+Texture size matter. Big texture can create aliasing effect if they need to be compressed and small texture will be blurred if they need to be stretched out. As such, it is common to pre-generate minimaps (smaller versions of a texture). Level sampling is choosing which minimap size to sample from. For level 0 sampling, we simply sample from the original full size texture file. Going one step down the rabbit hole, we can calculate an optimal minimap level based on the size of the of the triangle in the texture plane. The calculation will generates a float value. In nearest level sampling, we simply round it to the closest integer. In linear level sampling, we sample the two closest minimap and lerp their result based on the closeness to the float level.
+
+You can now adjust your sampling technique by selecting pixel sampling, level sampling, or the number of samples per pixel. Describe the tradeoffs between speed, memory usage, and antialiasing power between the three various techniques.
+
+The number of samples per pixel is a memory usage costly technique if unoptimized (like this implementation) because memory usage increases linearly with sample rate. As such, the speed is also decreased linearly. Though, the antialiasing power is significant because it has greater precision from using subpixels.
+The pixel sampling technique has the least memory usage because it only compares 4 pixels for bilinear pixel sampling. As such, the speed loss is also the least. However, its antialiasing power is not as great.
+The level sampling technique require arguably the most memory usage because it must pre-generate the minimaps. Furthermore, its speed loss is not that much because the minimaps are pregenerated. The antialiasing power is good because it basically blur the image by using a lower resolution image. Though, at time, this effect may be a bit much.
+
+
+Using a png file you find yourself, show us four versions of the image, using the combinations of L_ZERO and P_NEAREST, L_ZERO and P_LINEAR, L_NEAREST and P_NEAREST, as well as L_NEAREST and P_LINEAR.
+
+
+To use your own png, make a copy of one of the existing svg files in svg/texmap/ (or create your own modelled after one of the provided svg files). Then, near the top of the file, change the texture filename to point to your own png. From there, you can run ./draw and pass in that svg file to render it and then save a screenshot of your results.
+
+
+Note: Choose a png that showcases the different sampling effects well. You may also want to zoom in/out, use the pixel inspector, etc. to demonstrate the differences.
+
+
+Extra credit: If you implemented any extra filtering methods, describe them and show comparisons between your results with the other above methods.
